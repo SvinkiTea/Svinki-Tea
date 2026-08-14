@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svinki Tea — Магазин китайского чая и посуды</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FDFBF7;
+            --card-bg: #FFFFFF;
+            --text-main: #2C221E;
+            --accent: #C05A46;
+            --accent-hover: #A54B38;
+            --border: #EAE3D9;
+            --tag-bg: #F4EFEB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .cart-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .cart-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(to bottom, #F5EFEB, var(--bg-color));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            color: #665C58;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-img {
+            height: 200px;
+            background: #EAE3D9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #887C75;
+            font-size: 0.9rem;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #665C58;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .buy-btn {
+            background: var(--tag-bg);
+            color: var(--text-main);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Modal Cart */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">🌿 Svinki Tea</a>
+        <button class="cart-btn" onclick="openCart()">
+            🛒 Корзина <span id="cart-count">0</span>
+        </button>
+    </header>
+
+    <div class="hero">
+        <h1>Магазин китайского чая и посуды</h1>
+        <p>Настоящие пуэры, улуны и фарфор для вашей чайной церемонии</p>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCategory('all')">Все товары</button>
+            <button class="filter-btn" onclick="filterCategory('puer')">Шу и Шен Пуэр</button>
+            <button class="filter-btn" onclick="filterCategory('oolong')">Улуны</button>
+            <button class="filter-btn" onclick="filterCategory('green')">Зеленый чай</button>
+            <button class="filter-btn" onclick="filterCategory('dishes')">Посуда</button>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Products will be injected via JS -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ваша корзина</h2>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div id="cart-items-list">
+                <p>Корзина пуста</p>
+            </div>
+            <div style="margin-top: 1.5rem; font-weight: 700; font-size: 1.2rem;">
+                Итого: <span id="cart-total">0</span> ₽
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ в Telegram</button>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, title: "Шу Пуэр «Мэнхай»", category: "puer", price: 450, desc: "Глубокий древесный вкус с нотками чернослива и ореха. 50г.", img: "Фото чая" },
+            { id: 2, title: "Да Хун Пао (Большой Красный Халат)", category: "oolong", price: 520, desc: "Классический сильноферментированный улун с минеральным послевкусием. 50г.", img: "Фото чая" },
+            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, desc: "Светлый улун с ярким цветочно-травянистым ароматом. 50г.", img: "Фото чая" },
+            { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, desc: "Элитный зеленый чай с мягким освежающим вкусом. 50г.", img: "Фото чая" },
+            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, desc: "Классическая белая гайвань для заваривания проливами.", img: "Фото посуды" },
+            { id: 6, title: "Пиала глиняная ручной работы", category: "dishes", price: 350, desc: "Удобная пиала, отлично держит тепло чая.", img: "Фото посуды" }
+        ];
+
+        let cart = [];
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach(product => {
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img">${product.img}</div>
+                        <div class="product-info">
+                            <span class="product-category">${getCategoryName(product.category)}</span>
+                            <h3 class="product-title">${product.title}</h3>
+                            <p class="product-desc">${product.desc}</p>
+                            <div class="product-footer">
+                                <span class="product-price">${product.price} ₽</span>
+                                <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function getCategoryName(cat) {
+            const names = { puer: 'Пуэр', oolong: 'Улун', green: 'Зеленый чай', dishes: 'Посуда' };
+            return names[cat] || cat;
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(cat);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const cartItem = cart.find(item => item.id === id);
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const list = document.getElementById('cart-items-list');
+            const totalElem = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<p>Корзина пуста</p>';
+                totalElem.innerText = '0';
+                return;
+            }
+
+            list.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.title}</strong><br>
+                            <small>${item.price} ₽ x ${item.quantity}</small>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:red;cursor:pointer;">Удалить</button>
+                    </div>
+                `;
+            });
+            
+            totalElem.innerText = total;
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert('Корзина пуста');
+            
+            let message = "Здравствуйте! Хочу сделать заказ в Svinki Tea:%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `- ${item.title} (${item.quantity} шт.) — ${item.price * item.quantity} ₽%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0AИтого: ${total} ₽`;
+            
+            // Здесь вместо YOUR_TELEGRAM_USERNAME укажите ваш ник в Телеграме
+            window.open(`https://t.me/YOUR_TELEGRAM_USERNAME?text=${message}`, '_blank');
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
