@@ -387,8 +387,9 @@
             { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
-        let cart = [];
-
+        // Загружаем корзину из памяти браузера при запуске сайта
+        let cart = JSON.parse(localStorage.getItem('svinki_cart')) || [];
+        
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
@@ -412,6 +413,9 @@
                 `;
             });
         }
+       function saveCart() {
+           localStorage.setItem('svinki_cart', JSON.stringify(cart));
+       }
 
         function getCategoryName(cat) {
             const names = { puer: 'Пуэр', oolong: 'Улун', green: 'Зеленый чай', dishes: 'Посуда' };
@@ -470,16 +474,37 @@
         }
 
         function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            const list = document.getElementById('cart-items-list');
-            const totalElem = document.getElementById('cart-total');
-            
-            if (cart.length === 0) {
-                list.innerHTML = '<p>Корзина пуста</p>';
-                totalElem.innerText = '0';
-                return;
-            }
+        saveCart(); // Сохраняем при каждом обновлении интерфейса корзины!
+    
+        document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+        const list = document.getElementById('cart-items-list');
+        const totalElem = document.getElementById('cart-total');
+    
+        if (cart.length === 0) {
+            list.innerHTML = '<p>Корзина пуста</p>';
+            totalElem.innerText = '0';
+            return;
+        }
+
+        list.innerHTML = '';
+        let total = 0;
+    
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.title}</strong><br>
+                        <small>${item.price} ₽ x ${item.quantity} ${item.unit}</small>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:red;cursor:pointer;">Удалить</button>
+                </div>
+            `;
+        });
+    
+        totalElem.innerText = total;
+    }
 
             list.innerHTML = '';
             let total = 0;
