@@ -565,32 +565,16 @@
                 return;
             }
 
-            // Вставьте сюда данные вашего бота:
-            const BOT_TOKEN = '8883453015:AAH5zsqYing19bE7LXAoz_YiwAfjF_Bu40M'; 
-            const CHAT_ID = '7144462819';
-
-            let message = `🛒 Номер заказа: Svinki Tea\n\n`;
-            message += `👤 Имя: ${name}\n`;
-            message += `📞 Телефон: ${phone}\n`;
-            message += `📍 Адрес: ${address}\n\n`;
-            message += `📦 Товары:\n`;
-            
             let total = 0;
             cart.forEach(item => {
-                message += `- ${item.title} (${item.quantity} ${item.unit}) — ${item.price * item.quantity} ₽\n`;
                 total += item.price * item.quantity;
             });
-            
-            message += `\n💰 Итого: ${total} ₽`;
 
-            // Отправка через Telegram API
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            // Отправляем данные на нашу серверную функцию Vercel
+            fetch('/api/order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: message
-                })
+                body: JSON.stringify({ name, phone, address, cart, total })
             })
             .then(response => {
                 if (response.ok) {
@@ -598,19 +582,19 @@
                     cart = [];
                     updateCartUI();
                     closeCart();
-                    // Очищаем поля формы
                     document.getElementById('client-name').value = '';
                     document.getElementById('client-phone').value = '';
                     document.getElementById('client-address').value = '';
                 } else {
-                    alert('Ошибка отправки. Проверьте правильность токена и Chat ID.');
+                    alert('Ошибка отправки. Попробуйте позже.');
                 }
             })
             .catch(error => {
                 console.error('Ошибка:', error);
-                alert('Не удалось отправить заказ. Проверьте интернет-соединение.');
+                alert('Не удалось отправить заказ.');
             });
         }
+
 
         renderProducts();
         updateCartUI();
