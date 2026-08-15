@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svinki Tea — Магазин китайского чая и посуды</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.svg">
     <style>
         :root {
             --bg-color: #FDFBF7;
@@ -33,7 +33,7 @@
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,6 +47,9 @@
             font-weight: 700;
             color: var(--accent);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .cart-btn {
@@ -71,9 +74,8 @@
             position: relative;
             text-align: center;
             padding: 5rem 1rem;
-            /* Затемнение + ваша картинка из репозитория */
-            background: linear-gradient(rgba(44, 34, 30, 0.5), rgba(44, 34, 30, 0.5)), 
-                        url('hero-bg.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(44, 34, 30, 0.6), rgba(44, 34, 30, 0.6)), 
+                        url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             color: #FFFFFF;
             border-bottom: 1px solid var(--border);
             overflow: hidden;
@@ -84,7 +86,6 @@
             font-size: 2.8rem;
             margin-bottom: 0.8rem;
             color: #FFFFFF;
-            /* Анимация текста: выезд снизу вверх */
             animation: slideUp 0.8s ease-out;
         }
 
@@ -96,22 +97,16 @@
             animation: slideUp 1s ease-out;
         }
 
-        /* Ключевые кадры анимаций */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
         @keyframes slideUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -145,8 +140,7 @@
         }
 
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            display: grid;grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 20px;
         }
 
@@ -166,13 +160,14 @@
         }
 
         .product-img {
-            height: 200px;
+            height: 180px;
             background: #EAE3D9;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #887C75;
             font-size: 0.9rem;
+            cursor: pointer;
         }
 
         .product-info {
@@ -194,6 +189,13 @@
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 8px;
+            cursor: pointer;
+            color: var(--text-main); /* Возвращен стандартный темный цвет */
+            transition: color 0.2s;
+        }
+
+        .product-title:hover {
+            color: var(--accent);
         }
 
         .product-desc {
@@ -213,25 +215,26 @@
         .product-price {
             font-size: 1.2rem;
             font-weight: 700;
+            color: var(--text-main);
         }
 
         .buy-btn {
-            background: var(--tag-bg);
-            color: var(--text-main);
+            background: var(--accent);
+            color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             transition: background 0.2s;
+            font-size: 0.85rem;
         }
 
         .buy-btn:hover {
-            background: var(--accent);
-            color: white;
+            background: var(--accent-hover);
         }
 
-        /* Modal Cart */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -247,8 +250,8 @@
             padding: 2rem;
             border-radius: 12px;
             width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
+            max-width: 550px;
+            max-height: 85vh;
             overflow-y: auto;
         }
 
@@ -256,7 +259,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .close-btn {
@@ -286,16 +289,20 @@
             cursor: pointer;
             margin-top: 1rem;
         }
+        
+        .checkout-btn:hover {
+            background: var(--accent-hover);
+        }
     </style>
 </head>
 <body>
 
     <header>
-       <a href="#" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-    <img src="logo.png" alt="Icon" style="height: 45px; width: 45px; border-radius: 50%; object-fit: cover;">
-    <span style="font-size: 1.4rem; font-weight: 700; color: var(--accent); letter-spacing: 0.5px;">Svinki Tea</span>
-       </a>
-        <button class="cart-btn" onclick="openCart()">Корзина<span id="cart-count">0</span>
+        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+            <span>Svinki Tea</span>
+        </a>
+        <button class="cart-btn" onclick="openCart()">
+            🛒 Корзина <span id="cart-count">0</span>
         </button>
     </header>
 
@@ -318,7 +325,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Cart -->
     <div class="modal" id="cart-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -334,22 +341,23 @@
             <button class="checkout-btn" onclick="checkout()">Оформить заказ в Telegram</button>
         </div>
     </div>
-    <!-- Модальное окно полной страницы товара -->
+
+    <!-- Modal Product Details -->
     <div class="modal" id="product-modal">
-        <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-product-title">Название товара</h2>
+                <h2 id="modal-title" style="font-size: 1.3rem;">Название</h2>
                 <button class="close-btn" onclick="closeProductModal()">&times;</button>
             </div>
-            <div id="modal-product-body" style="font-size: 0.95rem; color: #555; line-height: 1.7;">
-                <!-- Сюда динамически подгрузится полное описание -->
+            <div id="modal-body" style="font-size: 0.95rem; color: #555; line-height: 1.6;">
+                <!-- Подробности -->
             </div>
             <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
                 <div>
-                    <span style="font-size: 1.3rem; font-weight: 700;" id="modal-product-price">0 ₽</span>
-                    <span style="font-size: 0.85rem; color: #887; margin-left: 8px;" id="modal-product-stock">В наличии: 0 шт.</span>
+                    <span id="modal-price" style="font-size: 1.3rem; font-weight: 700;">0 ₽</span>
+                    <span id="modal-stock" style="font-size: 0.85rem; color: #776; display: block;">Наличие: 0 шт.</span>
                 </div>
-                <button class="checkout-btn" style="width: auto; padding: 0.6rem 1.5rem; margin: 0;" id="modal-buy-btn">В корзину</button>
+                <button class="buy-btn" id="modal-add-btn" style="padding: 0.7rem 1.5rem;">В корзину</button>
             </div>
         </div>
     </div>
@@ -361,23 +369,22 @@
                 title: "Монетка Шу Пуэра с зелёным мандарином", 
                 category: "puer", 
                 price: 30, 
-                unit: "штука",
+                unit: "шт",
                 stock: 15,
-                desc: "Союз выдержанной глубины и цитрусовой свежести. Начальные ноты яркой цедры и сушёной дыни мягко сменяются древесно-пряным послевкусием.", 
+                desc: "Союз выдержанной глубины и цитрусовой свежести. Ноты цедры и сушёной дыни.", 
                 details: {
                     state: "Мягкое согревание, ясность ума.",
-                    brew: "95–100°C, метод пролива (гайвань). До 7–10 честных заварок.",
+                    brew: "95–100°C, метод пролива (гайвань). До 7 честных заварок.",
                     aroma: "Цедра зелёного мандарина, сушёная дыня, древесная кора.",
-                    taste: "Густой маслянистый пуэр с медовой сладостью и освежающей кислинкой цитруса.",
-                    guide: "1 монетка на 150 мл воды. Заваривать проливами, начиная с 10–15 секунд."
+                    taste: "Густой маслянистый пуэр с медовой сладостью и кислинкой цитруса.",
+                    guide: "1 «монетка» на 150 мл воды. Проливами от 10–15 секунд."
                 },
                 img: "Фото чая" 
-            },
-            { id: 2, title: "Да Хун Пао (Большой Красный Халат)", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и концентрация", brew: "95°C, проливами", aroma: "Огненные ноты, печеная карамель", taste: "Мягкий, с долгим сладковатым послевкусием", guide: "5г на 100 мл" }, img: "Фото чая" },
+            },{ id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },
             { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
             { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50г", stock: 4, desc: "Элитный зеленый чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4г на 150 мл" }, img: "Фото чая" },
-            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент для церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
-            { id: 6, title: "Пиала глиняная ручной работы", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
+            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
+            { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
         let cart = [];
@@ -391,19 +398,14 @@
             filtered.forEach(product => {
                 grid.innerHTML += `
                     <div class="product-card">
-                        <!-- Клик по картинке открывает подробное описание -->
-                        <div class="product-img" onclick="openProductModal(${product.id})" style="cursor: pointer;">${product.img}</div>
+                        <div class="product-img" onclick="openProductModal(${product.id})">${product.img}</div>
                         <div class="product-info">
                             <span class="product-category">${getCategoryName(product.category)}</span>
-                            <!-- Клик по названию тоже открывает подробное описание -->
-                            <h3 class="product-title" onclick="openProductModal(${product.id})" style="cursor: pointer; color: var(--accent);">${product.title}</h3>
+                            <h3 class="product-title" onclick="openProductModal(${product.id})">${product.title}</h3>
                             <p class="product-desc">${product.desc}</p>
                             <div class="product-footer">
                                 <span class="product-price">${product.price} ₽</span>
-                                <div style="display: flex; gap: 5px;">
-                                    <button class="buy-btn" onclick="openProductModal(${product.id})" style="background: var(--border);">Подробнее</button>
-                                    <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
-                                </div>
+                                <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
                             </div>
                         </div>
                     </div>
@@ -420,6 +422,40 @@
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             renderProducts(cat);
+        }
+
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('modal-title').innerText = product.title;
+            document.getElementById('modal-price').innerText = `${product.price} ₽ / ${product.unit}`;
+            document.getElementById('modal-stock').innerText = `Наличие: ${product.stock} ${product.unit}`;
+            
+            let html = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
+            if (product.details) {
+                html += `<div style="background: var(--tag-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p><strong>★ Состояние:</strong> ${product.details.state}</p>
+                        <p><strong>★ Заварка:</strong> ${product.details.brew}</p>
+                        <p><strong>★ Аромат:</strong> ${product.details.aroma}</p>
+                        <p><strong>★ Вкус:</strong> ${product.details.taste}</p>
+                    </div>
+                    <p><strong>Способ заваривания:</strong> ${product.details.guide}</p>
+                `;
+            }
+            document.getElementById('modal-body').innerHTML = html;
+
+            const addBtn = document.getElementById('modal-add-btn');
+            addBtn.onclick = function() {
+                addToCart(product.id);
+                closeProductModal();
+            };
+
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
         }
 
         function addToCart(id) {
@@ -454,7 +490,7 @@
                     <div class="cart-item">
                         <div>
                             <strong>${item.title}</strong><br>
-                            <small>${item.price} ₽ x ${item.quantity}</small>
+                            <small>${item.price} ₽ x ${item.quantity} ${item.unit}</small>
                         </div>
                         <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:red;cursor:pointer;">Удалить</button>
                     </div>
@@ -484,54 +520,15 @@
             let total = 0;
             
             cart.forEach(item => {
-                message += `- ${item.title} (${item.quantity} шт.) — ${item.price * item.quantity} ₽%0A`;
+                message += `- ${item.title} (${item.quantity} ${item.unit}) — ${item.price * item.quantity} ₽%0A`;
                 total += item.price * item.quantity;
             });
             
             message += `%0AИтого: ${total} ₽`;
-            
-            // Здесь вместо YOUR_TELEGRAM_USERNAME укажите ваш ник в Телеграме
             window.open(`https://t.me/YOUR_TELEGRAM_USERNAME?text=${message}`, '_blank');
         }
 
         renderProducts();
-        function openProductModal(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-
-            document.getElementById('modal-product-title').innerText = product.title;
-            document.getElementById('modal-product-price').innerText = `${product.price} ₽ / ${product.unit}`;
-            document.getElementById('modal-product-stock').innerText = `В наличии: ${product.stock} ${product.unit}`;
-            
-            let detailsHtml = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
-            
-            if (product.details) {
-                detailsHtml += `
-                    <div style="background: var(--tag-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p><strong>★ Состояние:</strong> ${product.details.state}</p>
-                        <p><strong>★ Заварка:</strong> ${product.details.brew}</p>
-                        <p><strong>★ Аромат:</strong> ${product.details.aroma}</p>
-                        <p><strong>★ Вкус:</strong> ${product.details.taste}</p>
-                    </div>
-                    <p><strong>Способ заваривания:</strong> ${product.details.guide}</p>
-                `;
-            }
-
-            document.getElementById('modal-product-body').innerHTML = detailsHtml;
-            
-            // Настраиваем кнопку покупки внутри модального окна
-            const buyBtn = document.getElementById('modal-buy-btn');
-            buyBtn.onclick = function() {
-                addToCart(product.id);
-                closeProductModal();
-            };
-
-            document.getElementById('product-modal').style.display = 'flex';
-        }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').style.display = 'none';
-        }
     </script>
 </body>
 </html>
