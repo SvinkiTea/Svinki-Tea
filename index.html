@@ -141,7 +141,8 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
@@ -278,6 +279,28 @@
             border-bottom: 1px solid var(--border);
         }
 
+        /* Стили для полей формы заказа */
+        .form-group {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group input {
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            background: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent);
+        }
+
         .checkout-btn {
             width: 100%;
             background: var(--accent);
@@ -288,6 +311,7 @@
             font-weight: 700;
             cursor: pointer;
             margin-top: 1rem;
+            transition: background 0.2s;
         }
         
         .checkout-btn:hover {
@@ -298,7 +322,8 @@
 <body>
 
     <header>
-        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;"><span>Svinki Tea</span>
+        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+            <span>Svinki Tea</span>
         </a>
         <button class="cart-btn" onclick="openCart()">Корзина <span id="cart-count">0</span></button>
     </header>
@@ -335,7 +360,15 @@
             <div style="margin-top: 1.5rem; font-weight: 700; font-size: 1.2rem;">
                 Итого: <span id="cart-total">0</span> ₽
             </div>
-            <button class="checkout-btn" onclick="checkout()">Оформить заказ в Telegram</button>
+
+            <!-- Форма ввода данных покупателя -->
+            <div class="form-group">
+                <input type="text" id="client-name" placeholder="Ваше имя">
+                <input type="tel" id="client-phone" placeholder="Номер телефона">
+                <input type="text" id="client-address" placeholder="Адрес доставки">
+            </div>
+
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
         </div>
     </div>
 
@@ -378,13 +411,13 @@
                 },
                 img: "Фото чая" 
             },
-            { id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },{ id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
+            { id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },
+            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
             { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50г", stock: 4, desc: "Элитный зеленый чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4г на 150 мл" }, img: "Фото чая" },
             { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
-            { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
+            { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "У удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
-        // Загружаем корзину из памяти браузера при запуске сайта
         let cart = JSON.parse(localStorage.getItem('svinki_cart')) || [];
         
         function saveCart() {
@@ -437,7 +470,8 @@
             let html = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
             if (product.details) {
                 html += `<div style="background: var(--tag-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p><strong>★ Состояние:</strong> ${product.details.state}</p><p><strong>★ Заварка:</strong> ${product.details.brew}</p>
+                        <p><strong>★ Состояние:</strong> ${product.details.state}</p>
+                        <p><strong>★ Заварка:</strong> ${product.details.brew}</p>
                         <p><strong>★ Аромат:</strong> ${product.details.aroma}</p>
                         <p><strong>★ Вкус:</strong> ${product.details.taste}</p>
                     </div>
@@ -471,7 +505,7 @@
         }
 
         function updateCartUI() {
-            saveCart(); // Сохраняем в localStorage при каждом изменении
+            saveCart();
     
             document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
     
@@ -517,21 +551,67 @@
         }
 
         function checkout() {
-            if (cart.length === 0) return alert('Корзина пуста');
+            if (cart.length === 0) {
+                alert('Корзина пуста');
+                return;
+            }
+
+            const name = document.getElementById('client-name').value.trim();
+            const phone = document.getElementById('client-phone').value.trim();
+            const address = document.getElementById('client-address').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Пожалуйста, заполните все поля (имя, телефон и адрес)!');
+                return;
+            }
+
+            // Вставьте сюда данные вашего бота:
+            const BOT_TOKEN = 'ВАШ_ТОКЕН_БОТА'; 
+            const CHAT_ID = 'ВАШ_ЛИЧНЫЙ_CHAT_ID';
+
+            let message = `🛒 Номер заказа: Svinki Tea\n\n`;
+            message += `👤 Имя: ${name}\n`;
+            message += `📞 Телефон: ${phone}\n`;
+            message += `📍 Адрес: ${address}\n\n`;
+            message += `📦 Товары:\n`;
             
-            let message = "Здравствуйте! Хочу сделать заказ в Svinki Tea:%0A";
             let total = 0;
-            
             cart.forEach(item => {
-                message += `- ${item.title} (${item.quantity} ${item.unit}) — ${item.price * item.quantity} ₽%0A`;
+                message += `- ${item.title} (${item.quantity} ${item.unit}) — ${item.price * item.quantity} ₽\n`;
                 total += item.price * item.quantity;
             });
             
-            message += `%0AИтого: ${total} ₽`;
-            window.open(`https://t.me/yayamiB?text=${message}`, '_blank');
+            message += `\n💰 Итого: ${total} ₽`;
+
+            // Отправка через Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Заказ успешно оформлен! Мы скоро с вами свяжемся.');
+                    cart = [];
+                    updateCartUI();
+                    closeCart();
+                    // Очищаем поля формы
+                    document.getElementById('client-name').value = '';
+                    document.getElementById('client-phone').value = '';
+                    document.getElementById('client-address').value = '';
+                } else {
+                    alert('Ошибка отправки. Проверьте правильность токена и Chat ID.');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Не удалось отправить заказ. Проверьте интернет-соединение.');
+            });
         }
 
-        // Инициализация при загрузке страницы
         renderProducts();
         updateCartUI();
     </script>
