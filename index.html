@@ -334,15 +334,50 @@
             <button class="checkout-btn" onclick="checkout()">Оформить заказ в Telegram</button>
         </div>
     </div>
+    <!-- Модальное окно полной страницы товара -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 id="modal-product-title">Название товара</h2>
+                <button class="close-btn" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div id="modal-product-body" style="font-size: 0.95rem; color: #555; line-height: 1.7;">
+                <!-- Сюда динамически подгрузится полное описание -->
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+                <div>
+                    <span style="font-size: 1.3rem; font-weight: 700;" id="modal-product-price">0 ₽</span>
+                    <span style="font-size: 0.85rem; color: #887; margin-left: 8px;" id="modal-product-stock">В наличии: 0 шт.</span>
+                </div>
+                <button class="checkout-btn" style="width: auto; padding: 0.6rem 1.5rem; margin: 0;" id="modal-buy-btn">В корзину</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const products = [
-            { id: 1, title: "Шу Пуэр «Мэнхай»", category: "puer", price: 450, desc: "Глубокий древесный вкус с нотками чернослива и ореха. 50г.", img: "Фото чая" },
-            { id: 2, title: "Да Хун Пао (Большой Красный Халат)", category: "oolong", price: 520, desc: "Классический сильноферментированный улун с минеральным послевкусием. 50г.", img: "Фото чая" },
-            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, desc: "Светлый улун с ярким цветочно-травянистым ароматом. 50г.", img: "Фото чая" },
-            { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, desc: "Элитный зеленый чай с мягким освежающим вкусом. 50г.", img: "Фото чая" },
-            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, desc: "Классическая белая гайвань для заваривания проливами.", img: "Фото посуды" },
-            { id: 6, title: "Пиала глиняная ручной работы", category: "dishes", price: 350, desc: "Удобная пиала, отлично держит тепло чая.", img: "Фото посуды" }
+            { 
+                id: 1, 
+                title: "Монетка Шу Пуэра с зелёным мандарином", 
+                category: "puer", 
+                price: 30, 
+                unit: "штука",
+                stock: 15,
+                desc: "Союз выдержанной глубины и цитрусовой свежести. Начальные ноты яркой цедры и сушёной дыни мягко сменяются древесно-пряным послевкусием.", 
+                details: {
+                    state: "Мягкое согревание, ясность ума.",
+                    brew: "95–100°C, метод пролива (гайвань). До 7–10 честных заварок.",
+                    aroma: "Цедра зелёного мандарина, сушёная дыня, древесная кора.",
+                    taste: "Густой маслянистый пуэр с медовой сладостью и освежающей кислинкой цитруса.",
+                    guide: "1 монетка на 150 мл воды. Заваривать проливами, начиная с 10–15 секунд."
+                },
+                img: "Фото чая" 
+            },
+            { id: 2, title: "Да Хун Пао (Большой Красный Халат)", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и концентрация", brew: "95°C, проливами", aroma: "Огненные ноты, печеная карамель", taste: "Мягкий, с долгим сладковатым послевкусием", guide: "5г на 100 мл" }, img: "Фото чая" },
+            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
+            { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50г", stock: 4, desc: "Элитный зеленый чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4г на 150 мл" }, img: "Фото чая" },
+            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент для церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
+            { id: 6, title: "Пиала глиняная ручной работы", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
         let cart = [];
@@ -356,14 +391,19 @@
             filtered.forEach(product => {
                 grid.innerHTML += `
                     <div class="product-card">
-                        <div class="product-img">${product.img}</div>
+                        <!-- Клик по картинке открывает подробное описание -->
+                        <div class="product-img" onclick="openProductModal(${product.id})" style="cursor: pointer;">${product.img}</div>
                         <div class="product-info">
                             <span class="product-category">${getCategoryName(product.category)}</span>
-                            <h3 class="product-title">${product.title}</h3>
+                            <!-- Клик по названию тоже открывает подробное описание -->
+                            <h3 class="product-title" onclick="openProductModal(${product.id})" style="cursor: pointer; color: var(--accent);">${product.title}</h3>
                             <p class="product-desc">${product.desc}</p>
                             <div class="product-footer">
                                 <span class="product-price">${product.price} ₽</span>
-                                <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
+                                <div style="display: flex; gap: 5px;">
+                                    <button class="buy-btn" onclick="openProductModal(${product.id})" style="background: var(--border);">Подробнее</button>
+                                    <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -455,6 +495,43 @@
         }
 
         renderProducts();
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('modal-product-title').innerText = product.title;
+            document.getElementById('modal-product-price').innerText = `${product.price} ₽ / ${product.unit}`;
+            document.getElementById('modal-product-stock').innerText = `В наличии: ${product.stock} ${product.unit}`;
+            
+            let detailsHtml = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
+            
+            if (product.details) {
+                detailsHtml += `
+                    <div style="background: var(--tag-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p><strong>★ Состояние:</strong> ${product.details.state}</p>
+                        <p><strong>★ Заварка:</strong> ${product.details.brew}</p>
+                        <p><strong>★ Аромат:</strong> ${product.details.aroma}</p>
+                        <p><strong>★ Вкус:</strong> ${product.details.taste}</p>
+                    </div>
+                    <p><strong>Способ заваривания:</strong> ${product.details.guide}</p>
+                `;
+            }
+
+            document.getElementById('modal-product-body').innerHTML = detailsHtml;
+            
+            // Настраиваем кнопку покупки внутри модального окна
+            const buyBtn = document.getElementById('modal-buy-btn');
+            buyBtn.onclick = function() {
+                addToCart(product.id);
+                closeProductModal();
+            };
+
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
