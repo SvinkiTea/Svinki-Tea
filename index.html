@@ -302,8 +302,7 @@
         <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
             <span>Svinki Tea</span>
         </a>
-        <button class="cart-btn" onclick="openCart()">
-            🛒 Корзина <span id="cart-count">0</span>
+        <button class="cart-btn" onclick="openCart()">Корзина <span id="cart-count">0</span>
         </button>
     </header>
 
@@ -526,7 +525,7 @@
             });
             
             message += `%0AИтого: ${total} ₽`;
-            window.open(`https://t.me/YOUR_TELEGRAM_USERNAME?text=${message}`, '_blank');
+            window.open(`https://t.me/yayamiB?text=${message}`, '_blank');
         }
 
         renderProducts();
