@@ -74,7 +74,6 @@
             position: relative;
             text-align: center;
             padding: 5rem 1rem;
-            /* Затемнение + ваша картинка из репозитория */
             background: linear-gradient(rgba(44, 34, 30, 0.5), rgba(44, 34, 30, 0.5)), 
                         url('hero-bg.jpg') center/cover no-repeat;
             color: #FFFFFF;
@@ -141,8 +140,8 @@
         }
 
         .products-grid {
-            display: grid;grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));gap: 20px;
         }
 
         .product-card {
@@ -191,7 +190,7 @@
             font-weight: 700;
             margin-bottom: 8px;
             cursor: pointer;
-            color: var(--text-main); /* Возвращен стандартный темный цвет */
+            color: var(--text-main);
             transition: color 0.2s;
         }
 
@@ -299,11 +298,9 @@
 <body>
 
     <header>
-        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
-            <span>Svinki Tea</span>
+        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;"><span>Svinki Tea</span>
         </a>
-        <button class="cart-btn" onclick="openCart()">Корзина <span id="cart-count">0</span>
-        </button>
+        <button class="cart-btn" onclick="openCart()">Корзина <span id="cart-count">0</span></button>
     </header>
 
     <div class="hero">
@@ -380,8 +377,8 @@
                     guide: "1 «монетка» на 150 мл воды. Проливами от 10–15 секунд."
                 },
                 img: "Фото чая" 
-            },{ id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },
-            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
+            },
+            { id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },{ id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
             { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50г", stock: 4, desc: "Элитный зеленый чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4г на 150 мл" }, img: "Фото чая" },
             { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
             { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
@@ -390,6 +387,10 @@
         // Загружаем корзину из памяти браузера при запуске сайта
         let cart = JSON.parse(localStorage.getItem('svinki_cart')) || [];
         
+        function saveCart() {
+            localStorage.setItem('svinki_cart', JSON.stringify(cart));
+        }
+
         function renderProducts(filter = 'all') {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
@@ -413,9 +414,6 @@
                 `;
             });
         }
-       function saveCart() {
-           localStorage.setItem('svinki_cart', JSON.stringify(cart));
-       }
 
         function getCategoryName(cat) {
             const names = { puer: 'Пуэр', oolong: 'Улун', green: 'Зеленый чай', dishes: 'Посуда' };
@@ -439,8 +437,7 @@
             let html = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
             if (product.details) {
                 html += `<div style="background: var(--tag-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p><strong>★ Состояние:</strong> ${product.details.state}</p>
-                        <p><strong>★ Заварка:</strong> ${product.details.brew}</p>
+                        <p><strong>★ Состояние:</strong> ${product.details.state}</p><p><strong>★ Заварка:</strong> ${product.details.brew}</p>
                         <p><strong>★ Аромат:</strong> ${product.details.aroma}</p>
                         <p><strong>★ Вкус:</strong> ${product.details.taste}</p>
                     </div>
@@ -474,41 +471,22 @@
         }
 
         function updateCartUI() {
-        saveCart(); // Сохраняем при каждом обновлении интерфейса корзины!
+            saveCart(); // Сохраняем в localStorage при каждом изменении
     
-        document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
     
-        const list = document.getElementById('cart-items-list');
-        const totalElem = document.getElementById('cart-total');
+            const list = document.getElementById('cart-items-list');
+            const totalElem = document.getElementById('cart-total');
     
-        if (cart.length === 0) {
-            list.innerHTML = '<p>Корзина пуста</p>';
-            totalElem.innerText = '0';
-            return;
-        }
-
-        list.innerHTML = '';
-        let total = 0;
-    
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-            list.innerHTML += `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.title}</strong><br>
-                        <small>${item.price} ₽ x ${item.quantity} ${item.unit}</small>
-                    </div>
-                    <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:red;cursor:pointer;">Удалить</button>
-                </div>
-            `;
-        });
-    
-        totalElem.innerText = total;
-    }
+            if (cart.length === 0) {
+                list.innerHTML = '<p>Корзина пуста</p>';
+                totalElem.innerText = '0';
+                return;
+            }
 
             list.innerHTML = '';
             let total = 0;
-            
+    
             cart.forEach(item => {
                 total += item.price * item.quantity;
                 list.innerHTML += `
@@ -521,7 +499,7 @@
                     </div>
                 `;
             });
-            
+    
             totalElem.innerText = total;
         }
 
@@ -553,7 +531,9 @@
             window.open(`https://t.me/yayamiB?text=${message}`, '_blank');
         }
 
+        // Инициализация при загрузке страницы
         renderProducts();
+        updateCartUI();
     </script>
 </body>
 </html>
