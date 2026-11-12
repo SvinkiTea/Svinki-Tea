@@ -317,35 +317,714 @@
         .checkout-btn:hover {
             background: var(--accent-hover);
         }
+
+        /* Brand and storefront sections */
+        :root {
+            --ink-soft: #665C58;
+            --sage: #657052;
+            --sage-light: #EDF0E7;
+            --peach: #F9E9E3;
+            --warm-sand: #F7F0E8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        select:focus-visible,
+        input:focus-visible {
+            outline: 3px solid rgba(192, 90, 70, 0.35);
+            outline-offset: 3px;
+        }
+
+        header {
+            padding: 0;
+        }
+
+        .header-inner {
+            width: min(1200px, 100%);
+            min-height: 68px;
+            margin: 0 auto;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            flex-shrink: 0;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 3px 10px rgba(44, 34, 30, 0.12);
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.35rem;
+            margin-left: auto;
+        }
+
+        .main-nav a {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--accent);
+        }
+
+        .cart-btn {
+            border-radius: 999px;
+            padding: 0.65rem 1.05rem;
+        }
+
+        #cart-count {
+            min-width: 1.35rem;
+            padding: 0.03rem 0.38rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.22);
+            text-align: center;
+        }
+
+        .hero {
+            min-height: 455px;
+            display: grid;
+            place-items: center;
+            padding: 5.5rem 1rem;
+            background: linear-gradient(110deg, rgba(44, 34, 30, 0.76), rgba(44, 34, 30, 0.42)), url('hero-bg.jpg') center/cover no-repeat;
+        }
+
+        .hero-content {
+            width: min(760px, 100%);
+            text-align: center;
+        }
+
+        .hero-eyebrow,
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-bottom: 0.85rem;
+            color: #F8E8D5;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .hero-eyebrow::before,
+        .section-eyebrow::before {
+            content: '•';
+            font-size: 1.2rem;
+            line-height: 0;
+        }
+
+        .hero h1 {
+            max-width: 720px;
+            margin: 0 auto 1rem;
+            font-size: clamp(2.8rem, 5vw, 4.35rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p {
+            max-width: 620px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.8rem;
+        }
+
+        .hero-btn,
+        .outline-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0.7rem 1.15rem;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-btn {
+            background: #FFFFFF;
+            color: var(--accent);
+        }
+
+        .hero-btn:hover,
+        .outline-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-btn:hover {
+            background: #FDF3EE;
+        }
+
+        .outline-btn {
+            border-color: rgba(255, 255, 255, 0.55);
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .outline-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: #FFFFFF;
+        }
+
+        .friendly-note {
+            max-width: 1200px;
+            margin: -34px auto 0;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .friendly-note-inner {
+            display: grid;
+            grid-template-columns: 82px 1fr auto;
+            gap: 1.15rem;
+            align-items: center;
+            padding: 1.1rem 1.35rem;
+            border: 1px solid rgba(234, 227, 217, 0.95);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 12px 30px rgba(44, 34, 30, 0.08);
+        }
+
+        .friendly-mark {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: var(--peach);
+            color: var(--accent);
+            font-size: 1.65rem;
+        }
+
+        .friendly-note h2,
+        .catalog-intro h2,
+        .story-content h2,
+        .service-heading h2 {
+            margin-bottom: 0.35rem;
+            font-size: 1.45rem;
+            line-height: 1.25;
+            letter-spacing: -0.025em;
+        }
+
+        .friendly-note p,
+        .catalog-intro p,
+        .story-content p,
+        .service-heading p {
+            color: var(--ink-soft);
+            font-size: 0.94rem;
+        }
+
+        .friendly-note span {
+            color: var(--sage);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .container.catalog-section {
+            margin-top: 4.25rem;
+            margin-bottom: 5rem;
+            scroll-margin-top: 90px;
+        }
+
+        .catalog-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .section-eyebrow {
+            margin-bottom: 0.55rem;
+            color: var(--accent);
+        }
+
+        .catalog-intro h2 {
+            font-size: 2rem;
+        }
+
+        .catalog-count {
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            background: var(--warm-sand);
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .catalog-tools {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--card-bg);
+        }
+
+        .filters {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-btn {
+            padding: 0.55rem 0.95rem;
+        }
+
+        .sort-control {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .sort-control select {
+            min-height: 38px;
+            padding: 0 2rem 0 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .products-grid {
+            gap: 22px;
+        }
+
+        .product-card {
+            border-radius: 16px;
+        }
+
+        .product-img {
+            position: relative;
+            height: 188px;
+            background: linear-gradient(135deg, #E8E1D5, #F6F2EB);
+            color: #887C75;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-category {
+            margin-bottom: 0;
+        }
+
+        .product-stock {
+            padding: 0.2rem 0.45rem;
+            border-radius: 999px;
+            background: var(--sage-light);
+            color: var(--sage);
+            font-size: 0.69rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .product-stock.low {
+            background: #FBE8E3;
+            color: var(--accent);
+        }
+
+        .product-price-wrap {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .product-price-wrap small {
+            margin-top: 0.18rem;
+            color: var(--ink-soft);
+            font-size: 0.72rem;
+        }
+
+        .story-section,
+        .service-section {
+            scroll-margin-top: 90px;
+        }
+
+        .story-section {
+            padding: 5rem 1rem;
+            background: var(--warm-sand);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .story-layout,
+        .service-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .story-content h2,
+        .service-heading h2 {
+            font-size: 2.15rem;
+        }
+
+        .story-content > p {
+            max-width: 470px;
+        }
+
+        .tea-principles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.9rem;
+        }
+
+        .principle-card {
+            min-height: 185px;
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--card-bg);
+        }
+
+        .principle-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 1.1rem;
+            border-radius: 11px;
+            background: var(--peach);
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .principle-card h3,
+        .service-card h3 {
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .principle-card p,
+        .service-card p {
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+
+        .service-section {
+            padding: 5rem 1rem;
+        }
+
+        .setup-note {
+            display: inline-flex;
+            margin-top: 1.1rem;
+            padding: 0.55rem 0.7rem;
+            border-radius: 9px;
+            background: var(--peach);
+            color: #945042;
+            font-size: 0.78rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .service-card {
+            min-height: 165px;
+            padding: 1.3rem;
+            border: 1px dashed #D6C9BB;
+            border-radius: 16px;
+            background: #FFFFFF;
+        }
+
+        .service-card:last-child {
+            grid-column: span 2;
+        }
+
+        .service-label {
+            display: inline-block;
+            margin-bottom: 0.65rem;
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .template-text {
+            color: #9A8D85 !important;
+            font-style: italic;
+        }
+
+        footer {
+            background: #30241F;
+            color: #F8F1E9;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem 1.35rem;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.35fr repeat(3, 1fr);
+            gap: 2rem;
+            padding-bottom: 2.4rem;
+        }
+
+        .footer-brand {
+            max-width: 330px;
+        }
+
+        .footer-brand .logo {
+            color: #F8F1E9;
+        }
+
+        .footer-brand p {
+            margin-top: 0.8rem;
+            color: #D8CAC0;
+            font-size: 0.85rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 0.7rem;
+            color: #FFFFFF;
+            font-size: 0.82rem;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #D8CAC0;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            color: #B9AAA0;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo"><img src="logo.png" alt="Icon" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
-            <span>Svinki Tea</span>
-        </a>
-        <button class="cart-btn" onclick="openCart()">Корзина <span id="cart-count">0</span></button>
+        <div class="header-inner">
+            <a href="#top" class="logo" aria-label="Svinki Tea — на главную">
+                <img src="logo.png" alt="Логотип Svinki Tea" class="logo-mark">
+                <span>Svinki Tea</span>
+            </a>
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="#catalog">Каталог</a>
+                <a href="#about">О нас</a>
+                <a href="#delivery">Доставка и оплата</a>
+            </nav>
+            <button class="cart-btn" type="button" onclick="openCart()" aria-label="Открыть корзину">Корзина <span id="cart-count">0</span></button>
+        </div>
     </header>
 
-    <div class="hero">
-        <h1>Магазин китайского чая и посуды</h1>
-        <p>Настоящие пуэры, улуны и фарфор для вашей чайной церемонии</p>
-    </div>
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <span class="hero-eyebrow">Свинки знают толк в чае</span>
+                <h1 id="hero-title">Китайский чай для тёплых разговоров</h1>
+                <p>Пуэры, улуны и посуда для домашних церемоний — без лишней серьёзности.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="hero-btn">Выбрать чай</a>
+                    <a href="#delivery" class="outline-btn">Как получить заказ</a>
+                </div>
+            </div>
+        </section>
 
-    <div class="container">
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterCategory('all')">Все товары</button>
-            <button class="filter-btn" onclick="filterCategory('puer')">Шу и Шен Пуэр</button>
-            <button class="filter-btn" onclick="filterCategory('oolong')">Улуны</button>
-            <button class="filter-btn" onclick="filterCategory('green')">Зеленый чай</button>
-            <button class="filter-btn" onclick="filterCategory('dishes')">Посуда</button>
-        </div>
+        <aside class="friendly-note" aria-label="О бренде Svinki Tea">
+            <div class="friendly-note-inner">
+                <div class="friendly-mark" aria-hidden="true">♡</div>
+                <div>
+                    <h2>Чай не должен быть сложным</h2>
+                    <p>Выбирайте по вкусу и настроению, а про температуру и заваривание мы подскажем в карточке каждого товара.</p>
+                </div>
+                <span>Завариваем с удовольствием</span>
+            </div>
+        </aside>
 
-        <div class="products-grid" id="products-grid">
-            <!-- Products will be injected via JS -->
+        <section class="container catalog-section" id="catalog" aria-labelledby="catalog-title">
+            <div class="catalog-heading">
+                <div class="catalog-intro">
+                    <span class="section-eyebrow">Каталог</span>
+                    <h2 id="catalog-title">Найдите свой чай</h2>
+                    <p>От ярких улунов до спокойных пуэров — выбирайте, что хочется заварить сегодня.</p>
+                </div>
+                <span class="catalog-count" id="catalog-count">6 товаров</span>
+            </div>
+
+            <div class="catalog-tools">
+                <div class="filters" role="group" aria-label="Фильтр товаров">
+                    <button class="filter-btn active" type="button" onclick="filterCategory('all', this)">Все товары</button>
+                    <button class="filter-btn" type="button" onclick="filterCategory('puer', this)">Шу и шен пуэр</button>
+                    <button class="filter-btn" type="button" onclick="filterCategory('oolong', this)">Улуны</button>
+                    <button class="filter-btn" type="button" onclick="filterCategory('green', this)">Зелёный чай</button>
+                    <button class="filter-btn" type="button" onclick="filterCategory('dishes', this)">Посуда</button>
+                </div>
+                <label class="sort-control" for="sort-products">
+                    Сортировка
+                    <select id="sort-products" onchange="setSort(this.value)">
+                        <option value="popular">Сначала популярное</option>
+                        <option value="price-asc">Сначала дешевле</option>
+                        <option value="price-desc">Сначала дороже</option>
+                        <option value="stock">Больше в наличии</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be injected via JS -->
+            </div>
+        </section>
+
+        <section class="story-section" id="about" aria-labelledby="about-title">
+            <div class="story-layout">
+                <div class="story-content">
+                    <span class="section-eyebrow">Наш подход</span>
+                    <h2 id="about-title">Собираем чайные моменты, а не сложные правила</h2>
+                    <p>Svinki Tea — дружелюбное место для тех, кто уже любит чай и для тех, кто только начинает. Здесь можно спокойно выбрать вкус, прочитать подсказки и заварить первую чашку без лишнего пафоса.</p>
+                </div>
+                <div class="tea-principles">
+                    <article class="principle-card">
+                        <div class="principle-icon" aria-hidden="true">☕</div>
+                        <h3>Понятно</h3>
+                        <p>Рассказываем о вкусе и заваривании простым человеческим языком.</p>
+                    </article>
+                    <article class="principle-card">
+                        <div class="principle-icon" aria-hidden="true">✦</div>
+                        <h3>По настроению</h3>
+                        <p>Ищите чай для фокуса, тихого вечера или разговора с друзьями.</p>
+                    </article>
+                    <article class="principle-card">
+                        <div class="principle-icon" aria-hidden="true">♡</div>
+                        <h3>С теплом</h3>
+                        <p>Подбираем вещи, к которым хочется возвращаться каждый день.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section" id="delivery" aria-labelledby="service-title">
+            <div class="service-layout">
+                <div class="service-heading">
+                    <span class="section-eyebrow">Перед оформлением</span>
+                    <h2 id="service-title">Доставка, оплата и связь</h2>
+                    <p>Ниже — готовая структура для важных условий. Я оставил её в виде шаблона, чтобы вы могли подставить реальные города, сроки, способы оплаты и контакты без переделки дизайна.</p>
+                    <span class="setup-note">Замените подсказки в квадратных скобках перед публикацией сайта.</span>
+                </div>
+                <div class="service-cards">
+                    <article class="service-card">
+                        <span class="service-label">Доставка</span>
+                        <h3>Получение заказа</h3>
+                        <p class="template-text">[Укажите города или регионы доставки, срок сборки, стоимость и доступные способы получения.]</p>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-label">Оплата</span>
+                        <h3>Как можно оплатить</h3>
+                        <p class="template-text">[Перечислите способы оплаты: перевод, карта, онлайн-оплата, наличные при получении — только актуальные варианты.]</p>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-label">Связь</span>
+                        <h3>Поможем с выбором</h3>
+                        <p class="template-text">[Добавьте Telegram, VK, номер телефона, часы ответов и короткую фразу о том, с чем вы можете помочь покупателю.]</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="#top" class="logo">
+                        <img src="logo.png" alt="Логотип Svinki Tea" class="logo-mark">
+                        <span>Svinki Tea</span>
+                    </a>
+                    <p>Китайский чай и посуда для маленьких домашних церемоний.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Покупателям</h3>
+                    <a href="#catalog">Каталог</a>
+                    <a href="#delivery">Доставка и оплата</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Связь</h3>
+                    <p>[Telegram: @ваш_аккаунт]</p>
+                    <p>[Телефон: +7 (000) 000-00-00]</p>
+                </div>
+                <div class="footer-column">
+                    <h3>График</h3>
+                    <p>[Укажите дни и часы, когда отвечаете покупателям.]</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="current-year"></span> Svinki Tea</span>
+                <span>С любовью к хорошему чаю</span>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Modal Cart -->
     <div class="modal" id="cart-modal">
@@ -411,52 +1090,96 @@
                 },
                 img: "Фото чая" 
             },
-            { id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5г на 100 мл кипятка" }, img: "Фото чая" },
-            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Легкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6г на 100 мл" }, img: "Фото чая" },
-            { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50г", stock: 4, desc: "Элитный зеленый чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4г на 150 мл" }, img: "Фото чая" },
-            { id: 5, title: "Гайвань керамическая 120мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент церемонии", brew: "Для любых чаев", aroma: "-", taste: "-", guide: "Классический объем 120 мл" }, img: "Фото посуды" },
-            { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "У удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "-", taste: "-", guide: "Ручная работа" }, img: "Фото посуды" }
+            { id: 2, title: "Да Хун Пао", category: "oolong", price: 520, unit: "50 г", stock: 5, desc: "Классический сильноферментированный улун с минеральным послевкусием.", details: { state: "Бодрость и фокус", brew: "95°C, проливы", aroma: "Огненные ноты, карамель", taste: "Мягкий, долгий сладковатый финиш", guide: "5 г на 100 мл кипятка" }, img: "Фото чая" },
+            { id: 3, title: "Те Гуань Инь", category: "oolong", price: 390, unit: "50 г", stock: 8, desc: "Светлый улун с ярким цветочно-травянистым ароматом.", details: { state: "Лёгкость, гармония", brew: "85–90°C", aroma: "Луговые цветы, сирень", taste: "Свежий, сладковатый", guide: "6 г на 100 мл" }, img: "Фото чая" },
+            { id: 4, title: "Синьян Маоцзянь", category: "green", price: 480, unit: "50 г", stock: 4, desc: "Элитный зелёный чай с мягким освежающим вкусом.", details: { state: "Тонизирует", brew: "80°C", aroma: "Свежая зелень, орех", taste: "Нежный, без горечи", guide: "4 г на 150 мл" }, img: "Фото чая" },
+            { id: 5, title: "Гайвань керамическая 120 мл", category: "dishes", price: 890, unit: "шт", stock: 2, desc: "Классическая белая гайвань для заваривания проливами.", details: { state: "Инструмент церемонии", brew: "Для любых чаёв", aroma: "—", taste: "—", guide: "Классический объём 120 мл" }, img: "Фото посуды" },
+            { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "—", taste: "—", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
         let cart = JSON.parse(localStorage.getItem('svinki_cart')) || [];
+        let currentFilter = 'all';
+        let currentSort = 'popular';
         
         function saveCart() {
             localStorage.setItem('svinki_cart', JSON.stringify(cart));
         }
 
-        function renderProducts(filter = 'all') {
+        function formatStock(product) {
+            if (product.stock <= 3) {
+                return `Осталось: ${product.stock}`;
+            }
+            return 'В наличии';
+        }
+
+        function getProductUnit(product) {
+            return product.unit === 'шт' ? 'за штуку' : `за ${product.unit}`;
+        }
+
+        function getStockDescription(product) {
+            return product.unit === 'шт'
+                ? `${product.stock} шт.`
+                : `${product.stock} уп. по ${product.unit}`;
+        }
+
+        function renderProducts() {
             const grid = document.getElementById('products-grid');
+            const catalogCount = document.getElementById('catalog-count');
+            let filtered = currentFilter === 'all'
+                ? [...products]
+                : products.filter(product => product.category === currentFilter);
+
+            if (currentSort === 'price-asc') {
+                filtered.sort((first, second) => first.price - second.price);
+            } else if (currentSort === 'price-desc') {
+                filtered.sort((first, second) => second.price - first.price);
+            } else if (currentSort === 'stock') {
+                filtered.sort((first, second) => second.stock - first.stock);
+            }
+
             grid.innerHTML = '';
-            
-            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            catalogCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'товар' : 'товаров'}`;
             
             filtered.forEach(product => {
+                const lowStockClass = product.stock <= 3 ? ' low' : '';
                 grid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img" onclick="openProductModal(${product.id})">${product.img}</div>
+                    <article class="product-card">
+                        <div class="product-img" role="button" tabindex="0" aria-label="Открыть карточку товара: ${product.title}" onclick="openProductModal(${product.id})" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProductModal(${product.id}); }">${product.img}</div>
                         <div class="product-info">
-                            <span class="product-category">${getCategoryName(product.category)}</span>
-                            <h3 class="product-title" onclick="openProductModal(${product.id})">${product.title}</h3>
+                            <div class="product-topline">
+                                <span class="product-category">${getCategoryName(product.category)}</span>
+                                <span class="product-stock${lowStockClass}">${formatStock(product)}</span>
+                            </div>
+                            <h3 class="product-title" role="button" tabindex="0" onclick="openProductModal(${product.id})" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProductModal(${product.id}); }">${product.title}</h3>
                             <p class="product-desc">${product.desc}</p>
                             <div class="product-footer">
-                                <span class="product-price">${product.price} ₽</span>
-                                <button class="buy-btn" onclick="addToCart(${product.id})">В корзину</button>
+                                <span class="product-price-wrap">
+                                    <span class="product-price">${product.price} ₽</span>
+                                    <small>${getProductUnit(product)}</small>
+                                </span>
+                                <button class="buy-btn" type="button" onclick="addToCart(${product.id})">В корзину</button>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 `;
             });
         }
 
-        function getCategoryName(cat) {
-            const names = { puer: 'Пуэр', oolong: 'Улун', green: 'Зеленый чай', dishes: 'Посуда' };
-            return names[cat] || cat;
+        function getCategoryName(category) {
+            const names = { puer: 'Пуэр', oolong: 'Улун', green: 'Зелёный чай', dishes: 'Посуда' };
+            return names[category] || category;
         }
 
-        function filterCategory(cat) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderProducts(cat);
+        function filterCategory(category, button) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(filterButton => filterButton.classList.remove('active'));
+            button.classList.add('active');
+            renderProducts();
+        }
+
+        function setSort(sort) {
+            currentSort = sort;
+            renderProducts();
         }
 
         function openProductModal(id) {
@@ -465,7 +1188,7 @@
 
             document.getElementById('modal-title').innerText = product.title;
             document.getElementById('modal-price').innerText = `${product.price} ₽ / ${product.unit}`;
-            document.getElementById('modal-stock').innerText = `Наличие: ${product.stock} ${product.unit}`;
+            document.getElementById('modal-stock').innerText = `В наличии: ${getStockDescription(product)}`;
             
             let html = `<p style="margin-bottom: 1rem; font-weight: 500; color: var(--text-main);">${product.desc}</p>`;
             if (product.details) {
@@ -596,6 +1319,7 @@
         }
 
 
+        document.getElementById('current-year').textContent = new Date().getFullYear();
         renderProducts();
         updateCartUI();
     </script>
