@@ -1451,6 +1451,49 @@
             { id: 6, title: "Пиала глиняная", category: "dishes", price: 350, unit: "шт", stock: 6, desc: "Удобная пиала, отлично держит тепло чая.", details: { state: "Уют чаепития", brew: "Для проливов", aroma: "—", taste: "—", guide: "Ручная работа" }, img: "Фото посуды" }
         ];
 
+        const heroQuotes = [
+            'Китайский чай для тёплых разговоров',
+            'Заваривайте моменты, к которым хочется возвращаться',
+            'Хороший чай начинается с маленькой паузы',
+            'Пусть в чашке будет чуть больше уюта',
+            'Чай, который собирает близких за одним столом',
+            'Остановитесь на минуту — заварите что-нибудь хорошее',
+            'Вкус, аромат и немного спокойствия в каждой чашке',
+            'Для разговоров до позднего вечера и мыслей с утра',
+            'Ваш маленький ритуал большого удовольствия',
+            'Заваривайте чай. Остальное подождёт.'
+        ];
+
+        function rotateHeroQuote() {
+            const title = document.getElementById('hero-title');
+            if (!title || !heroQuotes.length) return;
+
+            let previousIndex = -1;
+            try {
+                const savedIndex = Number(sessionStorage.getItem('svinki_last_hero_quote'));
+                if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < heroQuotes.length) {
+                    previousIndex = savedIndex;
+                }
+            } catch (error) {
+                // The title can still rotate when browser storage is unavailable.
+            }
+
+            let nextIndex;
+            if (heroQuotes.length > 1 && previousIndex >= 0) {
+                nextIndex = Math.floor(Math.random() * (heroQuotes.length - 1));
+                if (nextIndex >= previousIndex) nextIndex += 1;
+            } else {
+                nextIndex = Math.floor(Math.random() * heroQuotes.length);
+            }
+
+            title.textContent = heroQuotes[nextIndex];
+            try {
+                sessionStorage.setItem('svinki_last_hero_quote', String(nextIndex));
+            } catch (error) {
+                // Storage is optional; the random quote has already been displayed.
+            }
+        }
+
         let cart = JSON.parse(localStorage.getItem('svinki_cart')) || [];
         let currentFilter = 'all';
         let currentSort = 'popular';
@@ -1809,6 +1852,7 @@
             if (event.key === 'Escape' && cartModal.style.display === 'flex') closeCart();
         });
 
+        rotateHeroQuote();
         document.getElementById('current-year').textContent = new Date().getFullYear();
         renderProducts();
         updateCartUI();
