@@ -1228,6 +1228,417 @@
         [hidden] {
             display: none !important;
         }
+
+        /* Tablet and mobile layout */
+        @media (max-width: 960px) {
+            .header-inner {
+                padding-right: 1.25rem;
+                padding-left: 1.25rem;
+            }
+
+            .story-layout,
+            .service-layout {
+                grid-template-columns: 1fr;
+                gap: 2.25rem;
+            }
+
+            .story-content > p {
+                max-width: 620px;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.75rem 2rem;
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 680px) {
+            header {
+                position: sticky;
+            }
+
+            .header-inner {
+                min-height: auto;
+                flex-wrap: wrap;
+                gap: 0.7rem 1rem;
+                padding: 0.65rem 1rem 0.55rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+                gap: 0.55rem;
+            }
+
+            .logo-mark {
+                width: 36px;
+                height: 36px;
+            }
+
+            .cart-btn {
+                margin-left: auto;
+                padding: 0.55rem 0.85rem;
+                font-size: 0.83rem;
+            }
+
+            .main-nav {
+                order: 3;
+                flex: 0 0 100%;
+                justify-content: flex-start;
+                gap: 0.35rem;
+                margin: 0;
+                padding-top: 0.55rem;
+                overflow-x: auto;
+                border-top: 1px solid var(--border);
+                scrollbar-width: none;
+            }
+
+            .main-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .main-nav a {
+                flex: 0 0 auto;
+                padding: 0.25rem 0.55rem;
+                font-size: 0.82rem;
+            }
+
+            .hero {
+                min-height: 0;
+                padding: 4.35rem 1rem 4.1rem;
+            }
+
+            .hero-eyebrow {
+                margin-bottom: 0.7rem;
+                font-size: 0.68rem;
+                letter-spacing: 0.09em;
+            }
+
+            .hero h1 {
+                max-width: 560px;
+                font-size: 2.25rem;
+                line-height: 1.13;
+                letter-spacing: -0.035em;
+            }
+
+            .hero p {
+                max-width: 510px;
+                font-size: 1rem;
+                line-height: 1.55;
+            }
+
+            .hero-actions {
+                width: min(100%, 320px);
+                flex-direction: column;
+                margin: 1.45rem auto 0;
+            }
+
+            .hero-btn,
+            .outline-btn {
+                width: 100%;
+                min-height: 46px;
+            }
+
+            .friendly-note {
+                margin-top: -22px;
+                padding: 0 0.8rem;
+            }
+
+            .friendly-note-inner {
+                grid-template-columns: 52px minmax(0, 1fr);
+                gap: 0.8rem;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .friendly-mark {
+                width: 52px;
+                height: 52px;
+                border-radius: 14px;
+                font-size: 1.35rem;
+            }
+
+            .friendly-note h2 {
+                font-size: 1.12rem;
+            }
+
+            .friendly-note p {
+                font-size: 0.82rem;
+                line-height: 1.5;
+            }
+
+            .friendly-note span {
+                grid-column: 2;
+                font-size: 0.73rem;
+                white-space: normal;
+            }
+
+            .container.catalog-section {
+                margin-top: 3rem;
+                margin-bottom: 3.5rem;
+                padding: 0 0.85rem;
+            }
+
+            .catalog-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .catalog-intro h2,
+            .story-content h2,
+            .service-heading h2 {
+                font-size: 1.75rem;
+                line-height: 1.18;
+            }
+
+            .catalog-intro p,
+            .story-content p,
+            .service-heading p {
+                font-size: 0.88rem;
+                line-height: 1.6;
+            }
+
+            .catalog-tools {
+                align-items: stretch;
+                flex-direction: column;
+                gap: 0.7rem;
+                margin-bottom: 1.2rem;
+                padding: 0.7rem;
+                border-radius: 14px;
+            }
+
+            .filters {
+                gap: 0.45rem;
+                width: calc(100% + 1.4rem);
+                margin: 0 -0.7rem;
+                padding: 0 0.7rem 0.15rem;
+            }
+
+            .filter-btn {
+                min-height: 38px;
+                padding: 0.45rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .sort-control {
+                justify-content: space-between;
+                font-size: 0.8rem;
+            }
+
+            .sort-control select {
+                flex: 1;
+                max-width: 220px;
+                font-size: 0.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .product-card:hover {
+                transform: none;
+            }
+
+            .product-img {
+                height: 178px;
+            }
+
+            .product-info {
+                padding: 1rem;
+            }
+
+            .product-title {
+                font-size: 1.03rem;
+            }
+
+            .product-desc {
+                margin-bottom: 0.85rem;
+                font-size: 0.85rem;
+            }
+
+            .product-footer {
+                gap: 0.75rem;
+            }
+
+            .buy-btn,
+            .product-cart-control {
+                flex-shrink: 0;
+            }
+
+            .buy-btn {
+                min-height: 40px;
+                padding: 0.55rem 0.8rem;
+            }
+
+            .product-cart-control button {
+                width: 36px;
+                height: 38px;
+            }
+
+            .story-section,
+            .service-section {
+                padding: 3.4rem 1rem;
+            }
+
+            .tea-principles,
+            .service-cards {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .principle-card,
+            .service-card {
+                min-height: 0;
+                padding: 1.05rem;
+                border-radius: 14px;
+            }
+
+            .principle-icon {
+                margin-bottom: 0.75rem;
+            }
+
+            .service-card:last-child {
+                grid-column: auto;
+            }
+
+            .setup-note {
+                margin-top: 0.9rem;
+                font-size: 0.74rem;
+            }
+
+            .footer-inner {
+                padding: 2.6rem 1rem 1.2rem;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+                padding-bottom: 1.75rem;
+            }
+
+            .footer-brand {
+                grid-column: auto;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+
+            .modal {
+                padding: 0.75rem;
+            }
+
+            .modal-content {
+                max-height: calc(100vh - 1.5rem);
+                padding: 1.25rem;
+                border-radius: 16px;
+            }
+
+            #product-modal .modal-content > div:last-child {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 0.9rem;
+            }
+
+            #product-modal .buy-btn {
+                width: 100%;
+            }
+
+            #cart-modal {
+                padding: 0;
+            }
+
+            #cart-modal .cart-panel {
+                width: 100%;
+                min-height: 100dvh;
+                padding: 1.15rem 1rem;
+                border-radius: 0;
+            }
+
+            .cart-header h2 {
+                font-size: 1.35rem;
+            }
+
+            .cart-caption {
+                font-size: 0.78rem;
+            }
+
+            .cart-item {
+                gap: 0.6rem;
+                padding: 0.9rem 0;
+            }
+
+            .cart-item-title {
+                font-size: 0.88rem;
+            }
+
+            .cart-item-controls {
+                gap: 0.6rem;
+            }
+
+            .cart-line-total {
+                font-size: 0.88rem;
+            }
+
+            .form-group input {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .logo {
+                font-size: 1.15rem;
+            }
+
+            .cart-btn {
+                padding: 0.52rem 0.68rem;
+            }
+
+            .hero {
+                padding: 3.8rem 0.85rem 3.75rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .friendly-note-inner {
+                grid-template-columns: 46px minmax(0, 1fr);
+                padding: 0.85rem;
+            }
+
+            .friendly-mark {
+                width: 46px;
+                height: 46px;
+            }
+
+            .catalog-intro h2,
+            .story-content h2,
+            .service-heading h2 {
+                font-size: 1.58rem;
+            }
+
+            .product-footer {
+                align-items: flex-end;
+            }
+
+            .product-price {
+                font-size: 1.08rem;
+            }
+
+            .cart-item-controls {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
