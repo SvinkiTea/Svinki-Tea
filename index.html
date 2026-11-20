@@ -235,6 +235,46 @@
             background: var(--accent-hover);
         }
 
+        .product-cart-control {
+            display: inline-flex;
+            align-items: center;
+            overflow: hidden;
+            min-height: 38px;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            background: #FFFFFF;
+        }
+
+        .product-cart-control button {
+            width: 32px;
+            height: 36px;
+            border: 0;
+            background: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1.1rem;
+            line-height: 1;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .product-cart-control button:hover:not(:disabled) {
+            background: var(--peach);
+            color: var(--accent-hover);
+        }
+
+        .product-cart-control button:disabled {
+            color: #CBB8B1;
+            cursor: not-allowed;
+        }
+
+        .product-cart-count {
+            min-width: 28px;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -1519,6 +1559,22 @@
                 : `${product.stock} уп. по ${product.unit}`;
         }
 
+        function renderProductCartControl(product) {
+            const cartItem = cart.find(item => item.id === product.id);
+            if (!cartItem) {
+                return `<button class="buy-btn" type="button" onclick="addToCart(${product.id})">В корзину</button>`;
+            }
+
+            const isAtStockLimit = cartItem.quantity >= product.stock;
+            return `
+                <div class="product-cart-control" role="group" aria-label="Количество товара: ${product.title}">
+                    <button type="button" onclick="changeQuantity(${product.id}, -1)" aria-label="Уменьшить количество ${product.title}">−</button>
+                    <span class="product-cart-count" aria-label="В корзине">${cartItem.quantity}</span>
+                    <button type="button" onclick="changeQuantity(${product.id}, 1)" aria-label="Увеличить количество ${product.title}" ${isAtStockLimit ? 'disabled' : ''}>+</button>
+                </div>
+            `;
+        }
+
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             const catalogCount = document.getElementById('catalog-count');
@@ -1554,7 +1610,7 @@
                                     <span class="product-price">${product.price} ₽</span>
                                     <small>${getProductUnit(product)}</small>
                                 </span>
-                                <button class="buy-btn" type="button" onclick="addToCart(${product.id})">В корзину</button>
+                                ${renderProductCartControl(product)}
                             </div>
                         </div>
                     </article>
@@ -1730,6 +1786,7 @@
                 itemsTotal.innerText = '0 шт.';
                 summary.hidden = true;
                 checkoutForm.hidden = true;
+                renderProducts();
                 return;
             }
 
@@ -1762,6 +1819,7 @@
             itemsTotal.innerText = `${count} ${count === 1 ? 'шт.' : 'шт.'}`;
             summary.hidden = false;
             checkoutForm.hidden = false;
+            renderProducts();
         }
 
         function removeFromCart(id) {
@@ -1854,7 +1912,6 @@
 
         rotateHeroQuote();
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        renderProducts();
         updateCartUI();
     </script>
 </body>
